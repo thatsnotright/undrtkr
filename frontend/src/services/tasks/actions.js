@@ -1,5 +1,7 @@
 import {
     FETCH_TASKS,
+    FETCH_FAILURE,
+    FETCH_SUCCESS,
     CREATE_TASK,
     UPDATE_TASK,
     DELETE_TASK,
@@ -9,6 +11,14 @@ export const fetchTasks = () => ({
     type: FETCH_TASKS,
 });
 
+export const fetchFailed = () => ({
+    type: FETCH_FAILURE,
+});
+
+export const fetchSuccess = (data) => ({
+    type: FETCH_SUCCESS,
+    payload: data,
+});
 /**
  * Create a new task
  *
