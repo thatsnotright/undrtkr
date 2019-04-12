@@ -14,9 +14,7 @@ const Task = ({description, url, due_date, priority, point_value, completeTask})
                 <div className="col-4">{description}</div>
                 <div className="col-2">{mapPriorityToUI[priority]}</div>
                 <div className="col-2">{point_value}</div>
-                <div className="col-2">
-                    {due_date && {due_date}}
-                </div>
+                <div className="col-2">{due_date}</div>
                 <div className="col-2">
                     <button onClick={completeTask}>✔</button>
                     <button onClick={completeTask}>❌</button>
