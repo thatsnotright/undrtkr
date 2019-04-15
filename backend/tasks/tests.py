@@ -59,3 +59,23 @@ class TaskTests(APITestCase):
         self.assertEqual(
             saved[1].parent_task.description, "Take over the world Plan 39"
         )
+
+    def test_update_task(self):
+        """        
+        Ensure we can update a task
+        """
+        data = {
+            "description": "Take over the world",
+            "priority": Task.MEDIUM,
+            "point_value": "11",
+        }
+
+        response = self.client.post(self.url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Task.objects.count(), 1)
+        saved = Task.objects.get()
+        data["description"] = "Fix Sink"
+        response = self.client.put(response.data['url'], data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Task.objects.count(), 1)
+        self.assertEqual(Task.objects.all()[0].description, "Fix Sink")

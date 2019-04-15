@@ -11,10 +11,10 @@ const isIncomplete = task => task && !task.complete;
 export default function taskReducer(state = initialState, {type, payload}) {
     switch(type) {
         case FETCH_FAILURE:
-        break;
+            return state;
         case FETCH_SUCCESS:{
             const { results: tasks } = payload;
-            return {...state, tasks, incomplete: R.filter(isIncomplete, tasks)};
+            return {...state, tasks: tasks || [], incomplete: R.filter(isIncomplete, tasks)};
         }
         default:
             return state;

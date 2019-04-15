@@ -7,7 +7,7 @@ const mapPriorityToUI = {
     'meh': 'Low',
 }
 
-const Task = ({description, url, due_date, priority, point_value, completeTask}) => {
+const Task = ({description, url, due_date, priority, point_value, completeTask, deleteTask}) => {
     return (
         <div className="task">
             <div className='row'>
@@ -17,7 +17,7 @@ const Task = ({description, url, due_date, priority, point_value, completeTask})
                 <div className="col-2">{due_date}</div>
                 <div className="col-2">
                     <button onClick={completeTask}>✔</button>
-                    <button onClick={completeTask}>❌</button>
+                    <button onClick={deleteTask}>❌</button>
                 </div>
             </div>
         </div>
@@ -29,6 +29,8 @@ Task.propTypes = {
     due_date: PropTypes.string,
     priority: PropTypes.string,
     point_value: PropTypes.number,
+    deleteTask: PropTypes.func,
+    completeTask: PropTypes.func,
 };
 
 export default Task;

@@ -34,21 +34,33 @@ class App extends Component {
     const { newPoints, newDesc, newPriority, newDueDate } = this.state;
     this.props.taskActions.createTask(newDesc, newPriority, newPoints, null, newDueDate);
   }
+
   changePriority = (e) => {
     this.setState({ newPriority: e.target.value });
   }
+
   changeDueDate = (newDate) => {
     this.setState({ newDueDate: newDate });
   }
+
   changeDescription = (e) => {
     this.setState({ newDesc: e.target.value });
   }
+
   changePoints = (e) => {
     const pts = parseInt(e.target.value, 10);
     if (Number.isNaN(pts) || pts > 11 || pts < 0) {
       return true;
     }
     this.setState({ newPoints: pts });
+  }
+
+  completeTask(taskUrl) {
+    this.props.taskActions.updateTask(taskUrl, { complete: true });
+  }
+
+  deleteTask(taskUrl) {
+    this.props.taskActions.deleteTask(taskUrl);
   }
 
   render() {
@@ -66,7 +78,7 @@ class App extends Component {
               <div className="col-2">Due Date</div>
               <div  className="col-2"></div>
           </div>
-          {this.props.incomplete.map( task => (<Task key={task.url} {...task} completeTask={this.completeTask} />))}
+          {this.props.incomplete.map( task => (<Task key={task.url} {...task} completeTask={() => this.completeTask(task.url)} deleteTask={() => this.deleteTask(task.url)} />))}
           <div className="row">
             <div className="col-4"><input type="text" onChange={this.changeDescription} value={newDesc}></input></div>
             <div className="col-2">

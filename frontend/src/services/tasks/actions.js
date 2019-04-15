@@ -50,10 +50,10 @@ export const createTask = (description, priority, points, parentTask, dueDate) =
  * @param {Date} dueDate A due date if applicable, null if unchanged
  * @param {boolean} complete If the task is done
  */
-export const updateTask = (id, description, priority, points, parentTask, dueDate, complete) => ({
+export const updateTask = (url, { description, priority, points, parentTask, dueDate, complete }) => ({
     type: UPDATE_TASK,
     payload: {
-        id,
+        url,
         description,
         priority,
         points,
@@ -67,10 +67,10 @@ export const updateTask = (id, description, priority, points, parentTask, dueDat
  * Delete an existing task
  * @param {URL} id 
  */
-export const deleteTask = (id) => ({
+export const deleteTask = (url) => ({
     type: DELETE_TASK,
     payload: {
-        id,
+        url,
     },
 });
 

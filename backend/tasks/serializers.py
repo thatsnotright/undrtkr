@@ -53,6 +53,7 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
             "point_value",
             "complete",
         )
+        validators = []
         extra_kwargs = {"parent_task": {"view_name": "api:tasks-detail"}}
 
 
@@ -68,16 +69,10 @@ class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
 
     @detail_route()
-    def subtasks(self, request, pk):
+    def subtasks(self, request):
         parent = self.get_object()
         subtasks = parent.subtasks.all()
         serializer = TaskSerializer(subtasks)
         return Response(serializer.data)
 
-    def update(self, instance, validated_data):
-        instance.description = validated_data.get("description", instance.description)
-        instance.due_date = validated_data.get("due_date", instance.due_date)
-        instance.priority = validated_data.get("priority", instance.priority)
-        instance.point_value = validated_data.get("point_value", instance.point_value)
-        instance.save()
-        return instance
+
