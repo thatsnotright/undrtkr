@@ -25,4 +25,7 @@ npm i && npm run start
 
 This will launch webpack dev server and you should be able to navigate to http://localhost:3000/
 
+NOTE: please ensure you alias testserver to resolve to your local address, you can do this by modifying /etc/hosts and adding the entry:
+127.0.0.1	testserver
+
 
